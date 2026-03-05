@@ -1,4 +1,10 @@
-<!DOCTYPE html>                                                                                 
+1. Go to https://github.com/satban/foil-support                                                 
+  2. Click on Alexa-login.html                                                                    
+  3. Click the pencil icon (Edit this file)                                                       
+  4. Select all and delete the current content                                                    
+  5. Paste this new content:                                                                      
+                                                                                                  
+  <!DOCTYPE html>                                                                                 
   <html lang="en">                                                                                
   <head>                                                                                          
     <meta charset="UTF-8">                                                                        
@@ -23,81 +29,28 @@
         width: 100%;                                                                              
         box-shadow: 0 20px 60px rgba(0,0,0,0.3);                                                  
       }                                                                                           
-      .logo {                                                                                     
-        text-align: center;                                                                       
-        margin-bottom: 24px;                                                                      
-      }                                                                                           
-      .logo h1 {                                                                                  
-        font-size: 32px;                                                                          
-        color: #333;                                                                              
-      }                                                                                           
-      .logo p {                                                                                   
-        color: #666;                                                                              
-        margin-top: 8px;                                                                          
-      }                                                                                           
-      .form-group {                                                                               
-        margin-bottom: 20px;                                                                      
-      }                                                                                           
-      label {                                                                                     
-        display: block;                                                                           
-        margin-bottom: 8px;                                                                       
-        font-weight: 500;                                                                         
-        color: #333;                                                                              
-      }                                                                                           
+      .logo { text-align: center; margin-bottom: 24px; }                                          
+      .logo h1 { font-size: 32px; color: #333; }                                                  
+      .logo p { color: #666; margin-top: 8px; }                                                   
+      .form-group { margin-bottom: 20px; }                                                        
+      label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }                
       input {                                                                                     
-        width: 100%;                                                                              
-        padding: 14px;                                                                            
-        border: 2px solid #e0e0e0;                                                                
-        border-radius: 8px;                                                                       
-        font-size: 16px;                                                                          
-        transition: border-color 0.2s;                                                            
+        width: 100%; padding: 14px; border: 2px solid #e0e0e0;                                    
+        border-radius: 8px; font-size: 16px;                                                      
       }                                                                                           
-      input:focus {                                                                               
-        outline: none;                                                                            
-        border-color: #667eea;                                                                    
-      }                                                                                           
+      input:focus { outline: none; border-color: #667eea; }                                       
       button {                                                                                    
-        width: 100%;                                                                              
-        padding: 14px;                                                                            
+        width: 100%; padding: 14px;                                                               
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);                            
-        color: white;                                                                             
-        border: none;                                                                             
-        border-radius: 8px;                                                                       
-        font-size: 16px;                                                                          
-        font-weight: 600;                                                                         
-        cursor: pointer;                                                                          
-        transition: transform 0.2s, box-shadow 0.2s;                                              
+        color: white; border: none; border-radius: 8px;                                           
+        font-size: 16px; font-weight: 600; cursor: pointer;                                       
       }                                                                                           
-      button:hover {                                                                              
-        transform: translateY(-2px);                                                              
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);                                          
-      }                                                                                           
-      button:disabled {                                                                           
-        opacity: 0.7;                                                                             
-        cursor: not-allowed;                                                                      
-        transform: none;                                                                          
-      }                                                                                           
-      .error {                                                                                    
-        background: #fee;                                                                         
-        color: #c00;                                                                              
-        padding: 12px;                                                                            
-        border-radius: 8px;                                                                       
-        margin-bottom: 20px;                                                                      
-        text-align: center;                                                                       
-        display: none;                                                                            
-      }                                                                                           
-      .info {                                                                                     
-        text-align: center;                                                                       
-        margin-top: 20px;                                                                         
-        color: #666;                                                                              
-        font-size: 14px;                                                                          
-      }                                                                                           
-      .loading {                                                                                  
-        display: none;                                                                            
-        text-align: center;                                                                       
-        margin-top: 10px;                                                                         
-        color: #667eea;                                                                           
-      }                                                                                           
+      button:disabled { opacity: 0.7; cursor: not-allowed; }                                      
+      .error { background: #fee; color: #c00; padding: 12px; border-radius: 8px; margin-bottom:   
+  20px; text-align: center; }                                                                     
+      .hidden { display: none; }                                                                  
+      .info { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }               
+      .loading { text-align: center; margin-top: 10px; color: #667eea; }                          
     </style>                                                                                      
   </head>                                                                                         
   <body>                                                                                          
@@ -106,109 +59,71 @@
         <h1>Foil</h1>                                                                             
         <p>Link your account to Alexa</p>                                                         
       </div>                                                                                      
-                                                                                                  
-      <div id="error" class="error"></div>                                                        
-                                                                                                  
-      <form id="loginForm">                                                                       
+      <div id="error" class="error hidden"></div>                                                 
+      <form id="loginForm" onsubmit="return handleSubmit(event)">                                 
         <div class="form-group">                                                                  
           <label for="email">Email</label>                                                        
-          <input type="email" id="email" name="email" required placeholder="your@email.com">      
+          <input type="email" id="email" required placeholder="your@email.com">                   
         </div>                                                                                    
-                                                                                                  
         <div class="form-group">                                                                  
           <label for="password">Password</label>                                                  
-          <input type="password" id="password" name="password" required placeholder="Your         
-  password">                                                                                      
+          <input type="password" id="password" required placeholder="Your password">              
         </div>                                                                                    
-                                                                                                  
         <button type="submit" id="submitBtn">Link Account</button>                                
-        <div id="loading" class="loading">Linking your account...</div>                           
+        <div id="loading" class="loading hidden">Linking your account...</div>                    
       </form>                                                                                     
-                                                                                                  
-      <p class="info">                                                                            
-        Sign in with your Foil account to enable voice commands with Alexa.                       
-      </p>                                                                                        
+      <p class="info">Sign in with your Foil account to enable voice commands with Alexa.</p>     
     </div>                                                                                        
-                                                                                                  
     <script>                                                                                      
-      const API_URL = 'https://aqdapnwrsvyjrpiwtwip.supabase.co/functions/v1/alexa-auth';         
+      var API_URL = 'https://aqdapnwrsvyjrpiwtwip.supabase.co/functions/v1/alexa-auth';           
+      var urlParams = new URLSearchParams(window.location.search);                                
+      var redirectUri = urlParams.get('redirect_uri');                                            
+      var state = urlParams.get('state');                                                         
+      var clientId = urlParams.get('client_id');                                                  
                                                                                                   
-      // Get OAuth params from URL                                                                
-      const urlParams = new URLSearchParams(window.location.search);                              
-      const redirectUri = urlParams.get('redirect_uri');                                          
-      const state = urlParams.get('state');                                                       
-      const clientId = urlParams.get('client_id');                                                
-                                                                                                  
-      // Show error if present in URL                                                             
-      const errorParam = urlParams.get('error');                                                  
-      if (errorParam) {                                                                           
-        document.getElementById('error').textContent = errorParam;                                
-        document.getElementById('error').style.display = 'block';                                 
+      function showError(msg) {                                                                   
+        var e = document.getElementById('error');                                                 
+        e.textContent = msg;                                                                      
+        e.classList.remove('hidden');                                                             
+      }                                                                                           
+      function hideError() { document.getElementById('error').classList.add('hidden'); }          
+      function setLoading(on) {                                                                   
+        document.getElementById('submitBtn').disabled = on;                                       
+        document.getElementById('loading').classList.toggle('hidden', !on);                       
       }                                                                                           
                                                                                                   
-      // Validate required params                                                                 
+      if (urlParams.get('error')) showError(urlParams.get('error'));                              
       if (!redirectUri || !state || !clientId) {                                                  
-        document.getElementById('error').textContent = 'Missing required OAuth parameters. Please 
-  try linking your account again from the Alexa app.';                                            
-        document.getElementById('error').style.display = 'block';                                 
+        showError('Missing OAuth parameters. Please try again from Alexa app.');                  
         document.getElementById('submitBtn').disabled = true;                                     
       }                                                                                           
                                                                                                   
-      document.getElementById('loginForm').addEventListener('submit', async (e) => {              
+      function handleSubmit(e) {                                                                  
         e.preventDefault();                                                                       
-                                                                                                  
-        const email = document.getElementById('email').value;                                     
-        const password = document.getElementById('password').value;                               
-        const errorDiv = document.getElementById('error');                                        
-        const submitBtn = document.getElementById('submitBtn');                                   
-        const loading = document.getElementById('loading');                                       
-                                                                                                  
-        errorDiv.style.display = 'none';                                                          
-        submitBtn.disabled = true;                                                                
-        loading.style.display = 'block';                                                          
-                                                                                                  
-        try {                                                                                     
-          const response = await fetch(`${API_URL}/login`, {                                      
-            method: 'POST',                                                                       
-            headers: {                                                                            
-              'Content-Type': 'application/json',                                                 
-            },                                                                                    
-            body: JSON.stringify({                                                                
-              email,                                                                              
-              password,                                                                           
-              redirect_uri: redirectUri,                                                          
-              state,                                                                              
-              client_id: clientId                                                                 
-            })                                                                                    
-          });                                                                                     
-                                                                                                  
-          const data = await response.json();                                                     
-                                                                                                  
-          if (data.error) {                                                                       
-            errorDiv.textContent = data.error;                                                    
-            errorDiv.style.display = 'block';                                                     
-            submitBtn.disabled = false;                                                           
-            loading.style.display = 'none';                                                       
-            return;                                                                               
+        var email = document.getElementById('email').value;                                       
+        var password = document.getElementById('password').value;                                 
+        if (!email || !password) { showError('Enter email and password.'); return false; }        
+        hideError();                                                                              
+        setLoading(true);                                                                         
+        var xhr = new XMLHttpRequest();                                                           
+        xhr.open('POST', API_URL + '/login', true);                                               
+        xhr.setRequestHeader('Content-Type', 'application/json');                                 
+        xhr.onreadystatechange = function() {                                                     
+          if (xhr.readyState === 4) {                                                             
+            setLoading(false);                                                                    
+            try {                                                                                 
+              var data = JSON.parse(xhr.responseText);                                            
+              if (data.error) { showError(data.error); return; }                                  
+              if (data.redirect_url) { window.location.href = data.redirect_url; }                
+              else { showError('Unexpected response.'); }                                         
+            } catch (err) { showError('Error: ' + err.message); }                                 
           }                                                                                       
-                                                                                                  
-          if (data.redirect_url) {                                                                
-            // Redirect back to Alexa with the auth code                                          
-            window.location.href = data.redirect_url;                                             
-          } else {                                                                                
-            errorDiv.textContent = 'Unexpected response. Please try again.';                      
-            errorDiv.style.display = 'block';                                                     
-            submitBtn.disabled = false;                                                           
-            loading.style.display = 'none';                                                       
-          }                                                                                       
-        } catch (err) {                                                                           
-          console.error('Login error:', err);                                                     
-          errorDiv.textContent = 'Connection error. Please try again.';                           
-          errorDiv.style.display = 'block';                                                       
-          submitBtn.disabled = false;                                                             
-          loading.style.display = 'none';                                                         
-        }                                                                                         
-      });                                                                                         
+        };                                                                                        
+        xhr.onerror = function() { setLoading(false); showError('Connection error.'); };          
+        xhr.send(JSON.stringify({ email: email, password: password, redirect_uri: redirectUri,    
+  state: state, client_id: clientId }));                                                          
+        return false;                                                                             
+      }                                                                                           
     </script>                                                                                     
   </body>                                                                                         
-  </html>
+  </html>                    
