@@ -99,6 +99,16 @@
     @keyframes spin {
       100% { transform: rotate(360deg); }
     }
+    .phone-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .desktop-message {
+      display: none;
+    }
+    .mobile-message {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -109,19 +119,43 @@
       </svg>
     </div>
     <h1>Email Confirmed!</h1>
-    <p>Your account has been verified. You can now sign in to Foil.</p>
-    <a href="com.getfoil.app://login-callback/" class="button">Open Foil App</a>
-    <p class="redirect-text">
-      <span class="spinner"></span>
-      Redirecting to app...
-    </p>
+
+    <!-- Mobile content -->
+    <div class="mobile-message" id="mobileContent">
+      <p>Your account has been verified. You can now sign in to Foil.</p>
+      <a href="com.getfoil.app://login-callback/" class="button">Open Foil App</a>
+      <p class="redirect-text">
+        <span class="spinner"></span>
+        Redirecting to app...
+      </p>
+    </div>
+
+    <!-- Desktop content -->
+    <div class="desktop-message" id="desktopContent">
+      <p>Your account has been verified.</p>
+      <div class="phone-icon">📱</div>
+      <p>Open the <strong>Foil app</strong> on your iPhone to sign in.</p>
+    </div>
   </div>
 
   <script>
-    // Auto-redirect after a short delay
-    setTimeout(function() {
-      window.location.href = 'com.getfoil.app://login-callback/';
-    }, 2000);
+    function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    if (isMobileDevice()) {
+      // Mobile: show app button and auto-redirect
+      document.getElementById('mobileContent').style.display = 'block';
+      document.getElementById('desktopContent').style.display = 'none';
+
+      setTimeout(function() {
+        window.location.href = 'com.getfoil.app://login-callback/';
+      }, 2000);
+    } else {
+      // Desktop: show message to open on phone
+      document.getElementById('mobileContent').style.display = 'none';
+      document.getElementById('desktopContent').style.display = 'block';
+    }
   </script>
 </body>
 </html>
