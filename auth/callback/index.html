@@ -143,9 +143,12 @@
 
     <!-- Android content -->
     <div class="hidden" id="androidContent">
-      <p>Your account has been verified.</p>
-      <div class="phone-icon">📱</div>
-      <p>Open the <strong>Foil app</strong> on your smartphone to sign in.</p>
+      <p>Your account has been verified. You can now sign in to Foil.</p>
+      <a href="com.getfoil.app://login-callback/" class="button">Open Foil App</a>
+      <p class="redirect-text">
+        <span class="spinner"></span>
+        Redirecting to app...
+      </p>
     </div>
 
     <!-- Desktop content -->
@@ -180,8 +183,12 @@
         window.location.href = 'com.getfoil.app://login-callback/';
       }, 2000);
     } else if (isAndroid()) {
-      // Android: show "iPhone only" message
+      // Android: show app button and auto-redirect
       document.getElementById('androidContent').style.display = 'block';
+
+      setTimeout(function() {
+        window.location.href = 'com.getfoil.app://login-callback/';
+      }, 2000);
     } else {
       // Desktop: show generic message with App Store link
       document.getElementById('desktopContent').style.display = 'block';
