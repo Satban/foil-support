@@ -110,11 +110,14 @@
       margin: 0 auto 20px;
       display: block;
     }
-    .desktop-message {
+    .hidden {
       display: none;
     }
-    .mobile-message {
-      display: block;
+    .app-store-badge {
+      margin-top: 16px;
+    }
+    .app-store-badge img {
+      height: 44px;
     }
   </style>
 </head>
@@ -128,8 +131,8 @@
     </div>
     <h1>Email Confirmed!</h1>
 
-    <!-- Mobile content -->
-    <div class="mobile-message" id="mobileContent">
+    <!-- iPhone content -->
+    <div class="hidden" id="iphoneContent">
       <p>Your account has been verified. You can now sign in to Foil.</p>
       <a href="com.getfoil.app://login-callback/" class="button">Open Foil App</a>
       <p class="redirect-text">
@@ -138,30 +141,50 @@
       </p>
     </div>
 
-    <!-- Desktop content -->
-    <div class="desktop-message" id="desktopContent">
+    <!-- Android content -->
+    <div class="hidden" id="androidContent">
       <p>Your account has been verified.</p>
       <div class="phone-icon">📱</div>
-      <p>Open the <strong>Foil app</strong> on your iPhone to sign in.</p>
+      <p>Foil is currently available on <strong>iPhone</strong> only.</p>
+      <p style="font-size: 14px; color: #999;">Android version coming soon!</p>
+    </div>
+
+    <!-- Desktop content -->
+    <div class="hidden" id="desktopContent">
+      <p>Your account has been verified.</p>
+      <div class="phone-icon">📱</div>
+      <p>Open the <strong>Foil app</strong> on your phone to sign in.</p>
+      <div class="app-store-badge">
+        <a href="https://apps.apple.com/app/foil-reduce-food-waste/id6740708498" target="_blank">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+        </a>
+      </div>
     </div>
   </div>
 
   <script>
-    function isMobileDevice() {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var ua = navigator.userAgent;
+
+    function isIPhone() {
+      return /iPhone|iPad|iPod/i.test(ua);
     }
 
-    if (isMobileDevice()) {
-      // Mobile: show app button and auto-redirect
-      document.getElementById('mobileContent').style.display = 'block';
-      document.getElementById('desktopContent').style.display = 'none';
+    function isAndroid() {
+      return /Android/i.test(ua);
+    }
+
+    if (isIPhone()) {
+      // iPhone: show app button and auto-redirect
+      document.getElementById('iphoneContent').style.display = 'block';
 
       setTimeout(function() {
         window.location.href = 'com.getfoil.app://login-callback/';
       }, 2000);
+    } else if (isAndroid()) {
+      // Android: show "iPhone only" message
+      document.getElementById('androidContent').style.display = 'block';
     } else {
-      // Desktop: show message to open on phone
-      document.getElementById('mobileContent').style.display = 'none';
+      // Desktop: show generic message with App Store link
       document.getElementById('desktopContent').style.display = 'block';
     }
   </script>
