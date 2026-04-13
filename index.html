@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foil - Stop Wasting Food, Start Saving Money</title>
-  <meta name="description" content="Foil helps you track what's in your kitchen, get AI recipe suggestions, and plan meals. Reduce food waste and save money.">
+  <title>Foil - A Smarter Kitchen, Together</title>
+  <meta name="description" content="Foil helps you organize your kitchen, discover recipes with what you have, and plan meals together as a household.">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,12 +13,20 @@
       theme: {
         extend: {
           colors: {
-            'foil-green': '#2e7d32',
-            'foil-green-dark': '#1b5e20',
-            'foil-green-light': '#4caf50',
-            'foil-orange': '#ED7014',
-            'foil-cream': '#f5f5dc',
-            'foil-bg': '#fafaf5',
+            'foil': {
+              'green': '#2e7d32',
+              'green-dark': '#1b5e20',
+              'green-light': '#4caf50',
+              'cream': '#FAF8F5',
+              'warm': '#F5F2EB',
+              'charcoal': '#1a1a1a',
+              'muted': '#6B7280',
+              'terracotta': '#C4A484',
+              'gold': '#D4A853',
+            }
+          },
+          fontFamily: {
+            'display': ['Inter', 'system-ui', 'sans-serif'],
           }
         }
       }
@@ -46,38 +54,37 @@
 
     .phone-mockup {
       background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
-      border-radius: 40px;
+      border-radius: 44px;
       padding: 12px;
-      box-shadow: 0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3);
+      box-shadow:
+        0 50px 100px -20px rgba(0,0,0,0.15),
+        0 30px 60px -30px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.1);
     }
 
     .phone-mockup img {
-      border-radius: 32px;
+      border-radius: 36px;
     }
 
-    .phone-notch {
+    .phone-glow {
       position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 28px;
-      background: #1a1a1a;
-      border-radius: 20px;
-      z-index: 10;
+      inset: -40px;
+      background: radial-gradient(ellipse at center, rgba(46, 125, 50, 0.15) 0%, transparent 70%);
+      z-index: -1;
     }
 
     .feature-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -15px rgba(46, 125, 50, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.1);
     }
 
     .stat-number {
-      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+      background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -85,124 +92,166 @@
 
     .scroll-fade {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(24px);
     }
 
-    .cta-button {
-      transition: all 0.3s ease;
+    .icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px -10px rgba(46, 125, 50, 0.5);
+    .notification-card {
+      background: white;
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 32px -8px rgba(0,0,0,0.12), 0 4px 8px -4px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.04);
     }
 
     .testimonial-card {
-      backdrop-filter: blur(10px);
+      background: white;
+      border: 1px solid #E5E7EB;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .float-animation {
-      animation: float 3s ease-in-out infinite;
+    .testimonial-card:hover {
+      border-color: #D1D5DB;
+      box-shadow: 0 8px 24px -8px rgba(0,0,0,0.08);
     }
 
     .store-badge {
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     .store-badge:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
+      opacity: 0.9;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #E5E7EB, transparent);
+    }
+
+    @keyframes subtle-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .float-animation {
+      animation: subtle-float 4s ease-in-out infinite;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
     }
   </style>
 </head>
-<body class="bg-foil-bg text-gray-800">
+<body class="bg-foil-cream text-foil-charcoal">
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-foil-cream/90 backdrop-blur-md border-b border-gray-200/50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <img src="images/foil_logo_transparent.png" alt="Foil" class="h-10 w-10">
-        <span class="text-xl font-bold text-foil-green">Foil</span>
-      </div>
+      <a href="/" class="flex items-center gap-3">
+        <img src="images/foil_logo_transparent.png" alt="Foil" class="h-9 w-9">
+        <span class="text-xl font-semibold text-foil-charcoal">Foil</span>
+      </a>
       <div class="hidden md:flex items-center gap-8">
-        <a href="#features" class="text-gray-600 hover:text-foil-green transition">Features</a>
-        <a href="#how-it-works" class="text-gray-600 hover:text-foil-green transition">How It Works</a>
-        <a href="#testimonials" class="text-gray-600 hover:text-foil-green transition">Reviews</a>
+        <a href="#features" class="text-foil-muted hover:text-foil-charcoal transition-colors">Features</a>
+        <a href="#how-it-works" class="text-foil-muted hover:text-foil-charcoal transition-colors">How It Works</a>
+        <a href="#reviews" class="text-foil-muted hover:text-foil-charcoal transition-colors">Reviews</a>
       </div>
-      <a href="#download" class="bg-foil-green text-white px-5 py-2 rounded-full font-medium hover:bg-foil-green-dark transition">
+      <a href="#download" class="bg-foil-green text-white px-5 py-2.5 rounded-full font-medium hover:bg-foil-green-dark transition-colors">
         Download Free
       </a>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="pt-32 pb-20 px-6 overflow-hidden">
+  <section class="pt-32 pb-24 px-6 overflow-hidden">
     <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
         <!-- Left: Copy -->
         <div class="scroll-fade">
-          <div class="inline-flex items-center gap-2 bg-green-100 text-foil-green px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <span class="w-2 h-2 bg-foil-green rounded-full animate-pulse"></span>
+          <div class="badge-pill bg-foil-green/10 text-foil-green mb-8">
+            <span class="w-2 h-2 bg-foil-green rounded-full"></span>
             Now on iOS & Android
           </div>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-            Stop Wasting Food.<br>
-            <span class="gradient-text">Start Saving Money.</span>
+
+          <h1 class="text-4xl md:text-5xl lg:text-[56px] font-extrabold leading-[1.1] tracking-tight mb-6">
+            A Smarter Kitchen,<br>
+            <span class="gradient-text">Together</span>
           </h1>
-          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-            Foil tracks what's in your kitchen, reminds you before food expires, and suggests recipes to use what you have. The average family wastes $1,500/year on food. Let's fix that.
+
+          <p class="text-xl text-foil-muted mb-10 leading-relaxed max-w-xl">
+            Know what you have. Use what you love. Foil helps you organize your kitchen, discover recipes with what's already there, and plan meals as a household.
           </p>
 
-          <!-- Stats inline -->
-          <div class="flex gap-8 mb-8">
+          <!-- Stats -->
+          <div class="flex gap-10 mb-10">
             <div>
               <div class="text-3xl font-bold stat-number">47%</div>
-              <div class="text-sm text-gray-500">Less food wasted</div>
+              <div class="text-sm text-foil-muted mt-1">More ingredients used</div>
             </div>
             <div>
               <div class="text-3xl font-bold stat-number">$127</div>
-              <div class="text-sm text-gray-500">Saved per month</div>
+              <div class="text-sm text-foil-muted mt-1">Saved monthly</div>
             </div>
             <div>
               <div class="text-3xl font-bold stat-number">10K+</div>
-              <div class="text-sm text-gray-500">Items tracked</div>
+              <div class="text-sm text-foil-muted mt-1">Items organized</div>
             </div>
           </div>
 
           <!-- Store badges -->
           <div class="flex flex-wrap gap-4" id="download">
             <a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="store-badge">
-              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store" class="h-14">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store" class="h-[52px]">
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="store-badge">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-[52px]">
             </a>
           </div>
         </div>
 
         <!-- Right: Phone mockup -->
         <div class="relative flex justify-center scroll-fade">
-          <div class="phone-mockup relative float-animation" style="width: 280px;">
-            <div class="phone-notch"></div>
-            <img src="images/screens/IMG_6234.PNG" alt="Foil App - Items detected from receipt" class="w-full">
-          </div>
-          <!-- Floating badges -->
-          <div class="absolute -left-4 top-20 bg-white rounded-2xl shadow-lg p-3 hidden md:flex items-center gap-2">
-            <span class="text-2xl">🧀</span>
-            <div>
-              <div class="text-sm font-semibold">Cheese</div>
-              <div class="text-xs text-orange-500">Expires in 2 days</div>
+          <div class="relative">
+            <div class="phone-glow"></div>
+            <div class="phone-mockup float-animation" style="width: 280px;">
+              <img src="images/screens/IMG_6234.PNG" alt="Foil App - Smart kitchen organization" class="w-full">
             </div>
           </div>
-          <div class="absolute -right-4 bottom-32 bg-white rounded-2xl shadow-lg p-3 hidden md:flex items-center gap-2">
-            <span class="text-2xl">🥗</span>
+
+          <!-- Floating notification cards -->
+          <div class="notification-card absolute -left-8 top-24 hidden lg:flex items-center gap-3">
+            <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
             <div>
-              <div class="text-sm font-semibold">Recipe found!</div>
-              <div class="text-xs text-foil-green">Uses 5 items</div>
+              <div class="text-sm font-medium text-foil-charcoal">Cheddar Cheese</div>
+              <div class="text-xs text-amber-600">Use within 2 days</div>
+            </div>
+          </div>
+
+          <div class="notification-card absolute -right-4 bottom-36 hidden lg:flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-medium text-foil-charcoal">Recipe found</div>
+              <div class="text-xs text-foil-green">Uses 5 ingredients</div>
             </div>
           </div>
         </div>
@@ -210,162 +259,241 @@
     </div>
   </section>
 
-  <!-- Trusted By / Social Proof Bar -->
-  <section class="py-12 bg-white border-y border-gray-100">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <p class="text-gray-400 text-sm mb-6">TRUSTED BY FAMILIES WHO CARE ABOUT FOOD WASTE</p>
-      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">⭐️</span>
-          <span class="font-semibold">4.8 Rating</span>
+  <!-- Trust Bar -->
+  <section class="py-10 border-y border-gray-200/60 bg-white/50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-wrap justify-center items-center gap-x-16 gap-y-6 text-foil-muted">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <span class="font-medium text-foil-charcoal">4.8 App Store Rating</span>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">📱</span>
-          <span class="font-semibold">5,000+ Downloads</span>
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          <span class="font-medium text-foil-charcoal">5,000+ Households</span>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🥬</span>
-          <span class="font-semibold">50,000+ Items Saved</span>
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="font-medium text-foil-charcoal">50,000+ Items Organized</span>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🌍</span>
-          <span class="font-semibold">Eco-Friendly</span>
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="font-medium text-foil-charcoal">Eco-Conscious</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-24 px-6">
+  <section id="features" class="py-28 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16 scroll-fade">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything You Need to<br><span class="gradient-text">Master Your Kitchen</span></h2>
-        <p class="text-xl text-gray-500 max-w-2xl mx-auto">From receipt scanning to meal planning, Foil handles it all with a sprinkle of AI magic.</p>
+      <div class="text-center mb-20 scroll-fade">
+        <h2 class="text-3xl md:text-4xl font-bold mb-5">Everything Your Kitchen Needs</h2>
+        <p class="text-xl text-foil-muted max-w-2xl mx-auto">From the grocery store to the dinner table, Foil keeps everything organized and everyone in sync.</p>
       </div>
 
       <!-- Feature 1: Receipt Scanning -->
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
-        <div class="scroll-fade order-2 md:order-1">
-          <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
-            <span>📸</span> AI-Powered
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-32">
+        <div class="scroll-fade order-2 lg:order-1">
+          <div class="badge-pill bg-blue-50 text-blue-700 mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            AI-Powered
           </div>
-          <h3 class="text-2xl md:text-3xl font-bold mb-4">Scan Receipts, Add 25 Items in Seconds</h3>
-          <p class="text-gray-600 mb-6 text-lg">
-            Just snap a photo of your grocery receipt. Foil's AI reads every item, assigns smart expiry dates, and sorts them into the right storage location. No manual entry needed.
+          <h3 class="text-2xl md:text-3xl font-bold mb-5">From Receipt to Fridge in Seconds</h3>
+          <p class="text-foil-muted mb-8 text-lg leading-relaxed">
+            Snap a photo of your grocery receipt. Foil reads every item, assigns smart expiry dates based on what it actually is, and sorts everything into the right place. No typing required.
           </p>
-          <ul class="space-y-3">
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Automatic item detection</span>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Recognizes items from any grocery store</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Smart expiry date assignment</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Tailored expiry dates—spinach gets 4 days, apples get 21</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Auto-sort to Fridge, Freezer, Pantry</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Auto-sorts to Fridge, Freezer, Pantry, or Counter</span>
             </li>
           </ul>
         </div>
-        <div class="flex justify-center order-1 md:order-2 scroll-fade">
-          <div class="phone-mockup" style="width: 260px;">
-            <img src="images/screens/IMG_6233.PNG" alt="Receipt scanning" class="w-full">
+        <div class="flex justify-center order-1 lg:order-2 scroll-fade">
+          <div class="relative">
+            <div class="phone-glow"></div>
+            <div class="phone-mockup" style="width: 260px;">
+              <img src="images/screens/IMG_6233.PNG" alt="Receipt scanning" class="w-full">
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Feature 2: AI Recipes -->
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-32">
         <div class="flex justify-center scroll-fade">
-          <div class="phone-mockup" style="width: 260px;">
-            <img src="images/screens/IMG_6238.PNG" alt="AI Recipe suggestions" class="w-full">
+          <div class="relative">
+            <div class="phone-glow"></div>
+            <div class="phone-mockup" style="width: 260px;">
+              <img src="images/screens/IMG_6238.PNG" alt="AI Recipe suggestions" class="w-full">
+            </div>
           </div>
         </div>
         <div class="scroll-fade">
-          <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
-            <span>✨</span> AI Recipes
+          <div class="badge-pill bg-orange-50 text-orange-700 mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            Smart Recipes
           </div>
-          <h3 class="text-2xl md:text-3xl font-bold mb-4">Recipes That Use What's Expiring</h3>
-          <p class="text-gray-600 mb-6 text-lg">
-            No more "what's for dinner?" moments. Foil generates personalized recipes prioritizing ingredients that need to be used soon. Select your cuisine, dietary needs, and course type.
+          <h3 class="text-2xl md:text-3xl font-bold mb-5">Recipes Built Around What You Have</h3>
+          <p class="text-foil-muted mb-8 text-lg leading-relaxed">
+            No more staring at the fridge wondering what to make. Foil suggests recipes that prioritize ingredients you should use soon—so everything gets its moment.
           </p>
-          <ul class="space-y-3">
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Prioritizes expiring ingredients</span>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Prioritizes ingredients that need attention</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Filter by cuisine & dietary needs</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Filter by cuisine, course, and dietary needs</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Save favorites to your cookbook</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Save your favorites to a personal cookbook</span>
             </li>
           </ul>
         </div>
       </div>
 
       <!-- Feature 3: Meal Planner -->
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
-        <div class="scroll-fade order-2 md:order-1">
-          <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
-            <span>📅</span> Plan Ahead
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-32">
+        <div class="scroll-fade order-2 lg:order-1">
+          <div class="badge-pill bg-purple-50 text-purple-700 mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Plan Ahead
           </div>
-          <h3 class="text-2xl md:text-3xl font-bold mb-4">Meal & Party Planner</h3>
-          <p class="text-gray-600 mb-6 text-lg">
-            Plan your week with breakfast, lunch, dinner, and snacks. Hosting a party? Set the date, guest count, and let Foil help you build the perfect menu with automatic shopping lists.
+          <h3 class="text-2xl md:text-3xl font-bold mb-5">Plan the Week, Not Just Tonight</h3>
+          <p class="text-foil-muted mb-8 text-lg leading-relaxed">
+            Map out breakfast, lunch, dinner, and snacks for the entire week. Hosting a gathering? The party planner helps you build menus, scale for guests, and create shopping lists automatically.
           </p>
-          <ul class="space-y-3">
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Weekly meal calendar</span>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Weekly calendar for all meals</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Party planning with guest scaling</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Party mode with guest count scaling</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Auto-generate shopping lists</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Auto-generates shopping lists from your plan</span>
             </li>
           </ul>
         </div>
-        <div class="flex justify-center order-1 md:order-2 scroll-fade">
-          <div class="phone-mockup" style="width: 260px;">
-            <img src="images/screens/IMG_6239.PNG" alt="Meal Planner" class="w-full">
+        <div class="flex justify-center order-1 lg:order-2 scroll-fade">
+          <div class="relative">
+            <div class="phone-glow"></div>
+            <div class="phone-mockup" style="width: 260px;">
+              <img src="images/screens/IMG_6239.PNG" alt="Meal Planner" class="w-full">
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Feature 4: Household Sharing -->
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="flex justify-center scroll-fade">
-          <div class="phone-mockup" style="width: 260px;">
-            <img src="images/screens/IMG_6242.PNG" alt="Household sharing" class="w-full">
+          <div class="relative">
+            <div class="phone-glow"></div>
+            <div class="phone-mockup" style="width: 260px;">
+              <img src="images/screens/IMG_6242.PNG" alt="Household sharing" class="w-full">
+            </div>
           </div>
         </div>
         <div class="scroll-fade">
-          <div class="inline-flex items-center gap-2 bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
-            <span>👨‍👩‍👧‍👦</span> Family Sync
+          <div class="badge-pill bg-pink-50 text-pink-700 mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            Together
           </div>
-          <h3 class="text-2xl md:text-3xl font-bold mb-4">Share Your Kitchen</h3>
-          <p class="text-gray-600 mb-6 text-lg">
-            Create a household and invite family or roommates. Everyone sees the same inventory in real-time. No more "who ate my yogurt?" moments—now you'll know who did.
+          <h3 class="text-2xl md:text-3xl font-bold mb-5">Your Kitchen, In Sync</h3>
+          <p class="text-foil-muted mb-8 text-lg leading-relaxed">
+            Create a household and invite your family or roommates. Everyone sees the same inventory, updated in real-time. When someone uses the last of the milk, everyone knows.
           </p>
-          <ul class="space-y-3">
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Real-time shared inventory</span>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Shared inventory, updated in real-time</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Activity log (see who added/used items)</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Activity log shows who added or used items</span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
-              <span>Up to 6 household members</span>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 bg-foil-green/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-foil-charcoal">Up to 6 household members</span>
             </li>
           </ul>
         </div>
@@ -374,80 +502,110 @@
   </section>
 
   <!-- How It Works -->
-  <section id="how-it-works" class="py-24 px-6 bg-white">
+  <section id="how-it-works" class="py-28 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16 scroll-fade">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">How Foil Works</h2>
-        <p class="text-xl text-gray-500">Three simple steps to a smarter kitchen</p>
+      <div class="text-center mb-20 scroll-fade">
+        <h2 class="text-3xl md:text-4xl font-bold mb-5">How Foil Works</h2>
+        <p class="text-xl text-foil-muted">Three simple steps to a smarter kitchen</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="feature-card bg-foil-bg rounded-3xl p-8 text-center scroll-fade">
-          <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">📸</div>
-          <h3 class="text-xl font-bold mb-3">1. Scan Your Receipt</h3>
-          <p class="text-gray-600">Snap a photo after shopping. AI extracts all items with smart expiry dates.</p>
+        <div class="feature-card bg-foil-cream rounded-3xl p-10 text-center scroll-fade">
+          <div class="w-16 h-16 bg-foil-green/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+            <svg class="w-8 h-8 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div class="text-sm font-semibold text-foil-green mb-3">Step 1</div>
+          <h3 class="text-xl font-bold mb-3">Capture</h3>
+          <p class="text-foil-muted">Snap your receipt after shopping. AI handles the rest—items, dates, locations.</p>
         </div>
-        <div class="feature-card bg-foil-bg rounded-3xl p-8 text-center scroll-fade">
-          <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">🔔</div>
-          <h3 class="text-xl font-bold mb-3">2. Get Notified</h3>
-          <p class="text-gray-600">Foil alerts you before food expires so you can use it in time.</p>
+
+        <div class="feature-card bg-foil-cream rounded-3xl p-10 text-center scroll-fade">
+          <div class="w-16 h-16 bg-foil-green/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+            <svg class="w-8 h-8 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </div>
+          <div class="text-sm font-semibold text-foil-green mb-3">Step 2</div>
+          <h3 class="text-xl font-bold mb-3">Stay Informed</h3>
+          <p class="text-foil-muted">Get gentle reminders before ingredients need to be used. Always know what's fresh.</p>
         </div>
-        <div class="feature-card bg-foil-bg rounded-3xl p-8 text-center scroll-fade">
-          <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">🍳</div>
-          <h3 class="text-xl font-bold mb-3">3. Cook & Save</h3>
-          <p class="text-gray-600">Get recipe ideas that prioritize expiring items. Waste less, save more.</p>
+
+        <div class="feature-card bg-foil-cream rounded-3xl p-10 text-center scroll-fade">
+          <div class="w-16 h-16 bg-foil-green/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+            <svg class="w-8 h-8 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div class="text-sm font-semibold text-foil-green mb-3">Step 3</div>
+          <h3 class="text-xl font-bold mb-3">Cook with Purpose</h3>
+          <p class="text-foil-muted">Get recipes that use what you have. Every ingredient gets its moment.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section id="testimonials" class="py-24 px-6">
+  <section id="reviews" class="py-28 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16 scroll-fade">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Loved by Families</h2>
-        <p class="text-xl text-gray-500">Join thousands reducing food waste</p>
+      <div class="text-center mb-20 scroll-fade">
+        <h2 class="text-3xl md:text-4xl font-bold mb-5">Trusted by Families</h2>
+        <p class="text-xl text-foil-muted">Join households who cook smarter together</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="testimonial-card bg-white rounded-3xl p-6 shadow-sm border border-gray-100 scroll-fade">
-          <div class="flex items-center gap-1 mb-4">
-            <span class="text-yellow-400">★★★★★</span>
+        <div class="testimonial-card rounded-2xl p-8 scroll-fade">
+          <div class="flex items-center gap-1 mb-5">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="text-gray-700 mb-4">"Finally an app that actually helps reduce waste. The receipt scanning is magic—25 items added in 10 seconds!"</p>
+          <p class="text-foil-charcoal mb-6 leading-relaxed">"Finally, an app that actually helps us use what we buy. Our family of four finishes everything now—it's become a game for the kids."</p>
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">👩</div>
+            <div class="w-10 h-10 bg-foil-green/10 rounded-full flex items-center justify-center text-sm font-semibold text-foil-green">SM</div>
             <div>
-              <div class="font-semibold text-sm">Sarah M.</div>
-              <div class="text-xs text-gray-400">Mom of 3</div>
+              <div class="font-medium text-sm text-foil-charcoal">Sarah M.</div>
+              <div class="text-xs text-foil-muted">Family of 4 · Austin, TX</div>
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card bg-white rounded-3xl p-6 shadow-sm border border-gray-100 scroll-fade">
-          <div class="flex items-center gap-1 mb-4">
-            <span class="text-yellow-400">★★★★★</span>
+        <div class="testimonial-card rounded-2xl p-8 scroll-fade">
+          <div class="flex items-center gap-1 mb-5">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="text-gray-700 mb-4">"The AI recipes are surprisingly good. It suggested a stir-fry using veggies that were about to go bad. Delicious!"</p>
+          <p class="text-foil-charcoal mb-6 leading-relaxed">"The recipe suggestions are genuinely useful. It found a stir-fry I never would've thought of using vegetables that were about to go."</p>
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">👨</div>
+            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-sm font-semibold text-blue-600">JK</div>
             <div>
-              <div class="font-semibold text-sm">James K.</div>
-              <div class="text-xs text-gray-400">Home Cook</div>
+              <div class="font-medium text-sm text-foil-charcoal">James K.</div>
+              <div class="text-xs text-foil-muted">Home Cook · Seattle, WA</div>
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card bg-white rounded-3xl p-6 shadow-sm border border-gray-100 scroll-fade">
-          <div class="flex items-center gap-1 mb-4">
-            <span class="text-yellow-400">★★★★★</span>
+        <div class="testimonial-card rounded-2xl p-8 scroll-fade">
+          <div class="flex items-center gap-1 mb-5">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="text-gray-700 mb-4">"My roommates and I finally stopped blaming each other for missing food. The household feature is a game changer!"</p>
+          <p class="text-foil-charcoal mb-6 leading-relaxed">"My roommates and I are finally on the same page. We all know what's in the fridge, and the shared shopping list is a lifesaver."</p>
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">👱‍♀️</div>
+            <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-sm font-semibold text-purple-600">ER</div>
             <div>
-              <div class="font-semibold text-sm">Emily R.</div>
-              <div class="text-xs text-gray-400">College Student</div>
+              <div class="font-medium text-sm text-foil-charcoal">Emily R.</div>
+              <div class="text-xs text-foil-muted">Roommates · Boston, MA</div>
             </div>
           </div>
         </div>
@@ -456,60 +614,60 @@
   </section>
 
   <!-- Final CTA -->
-  <section class="py-24 px-6 bg-gradient-to-br from-foil-green to-foil-green-light text-white">
-    <div class="max-w-4xl mx-auto text-center scroll-fade">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to Stop Wasting Food?</h2>
-      <p class="text-xl text-green-100 mb-10">Join thousands of families saving money and reducing waste. It's free to get started.</p>
+  <section class="py-28 px-6 bg-gradient-to-br from-foil-green via-foil-green to-foil-green-light text-white">
+    <div class="max-w-3xl mx-auto text-center scroll-fade">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">Ready to Cook Smarter?</h2>
+      <p class="text-xl text-green-100 mb-12 leading-relaxed">Join thousands of households making the most of every grocery run. Free to start, always.</p>
 
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <div class="flex flex-wrap justify-center gap-4 mb-10">
         <a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="store-badge">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store" class="h-16">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store" class="h-14">
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="store-badge">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-16">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
         </a>
       </div>
 
-      <p class="text-green-200 text-sm">Free to use. Premium features available.</p>
+      <p class="text-green-200 text-sm">Free to use · Premium features available</p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-12 px-6 bg-gray-900 text-gray-400">
+  <footer class="py-16 px-6 bg-foil-charcoal text-gray-400">
     <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
         <div>
-          <div class="flex items-center gap-2 mb-4">
-            <img src="images/foil_logo_transparent.png" alt="Foil" class="h-8 w-8">
-            <span class="text-xl font-bold text-white">Foil</span>
+          <div class="flex items-center gap-3 mb-5">
+            <img src="images/foil_logo_transparent.png" alt="Foil" class="h-8 w-8 brightness-0 invert">
+            <span class="text-lg font-semibold text-white">Foil</span>
           </div>
-          <p class="text-sm">Reduce food waste, save money, and eat better with AI-powered kitchen management.</p>
+          <p class="text-sm leading-relaxed">A smarter way to organize your kitchen, discover recipes, and cook together as a household.</p>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-4">Product</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#features" class="hover:text-white transition">Features</a></li>
-            <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
-            <li><a href="#download" class="hover:text-white transition">Download</a></li>
+          <h4 class="font-semibold text-white mb-5">Product</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
+            <li><a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a></li>
+            <li><a href="#download" class="hover:text-white transition-colors">Download</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-4">Support</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="mailto:getfoilapp@gmail.com" class="hover:text-white transition">Contact Us</a></li>
-            <li><a href="account-deletion.html" class="hover:text-white transition">Delete Account</a></li>
+          <h4 class="font-semibold text-white mb-5">Support</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="mailto:getfoilapp@gmail.com" class="hover:text-white transition-colors">Contact Us</a></li>
+            <li><a href="account-deletion.html" class="hover:text-white transition-colors">Delete Account</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-4">Download</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="hover:text-white transition">App Store</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="hover:text-white transition">Google Play</a></li>
+          <h4 class="font-semibold text-white mb-5">Download</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="hover:text-white transition-colors">App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="hover:text-white transition-colors">Google Play</a></li>
           </ul>
         </div>
       </div>
       <div class="border-t border-gray-800 pt-8 text-center text-sm">
-        <p>&copy; 2024 Foil. All rights reserved.</p>
+        <p>© 2024 Foil. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -519,17 +677,17 @@
     gsap.registerPlugin(ScrollTrigger);
 
     // Animate elements on scroll
-    gsap.utils.toArray('.scroll-fade').forEach(element => {
+    gsap.utils.toArray('.scroll-fade').forEach((element, i) => {
       gsap.fromTo(element,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 24 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: 'power2.out',
+          duration: 0.7,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: element,
-            start: 'top 85%',
+            start: 'top 88%',
             toggleActions: 'play none none none'
           }
         }
