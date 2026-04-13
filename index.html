@@ -3,128 +3,549 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foil - Account Deletion</title>
+  <title>Foil - Stop Wasting Food, Start Saving Money</title>
+  <meta name="description" content="Foil helps you track what's in your kitchen, get AI recipe suggestions, and plan meals. Reduce food waste and save money.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'foil-green': '#2e7d32',
+            'foil-green-dark': '#1b5e20',
+            'foil-green-light': '#4caf50',
+            'foil-orange': '#ED7014',
+            'foil-cream': '#f5f5dc',
+            'foil-bg': '#fafaf5',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      background: #fafafa;
+
+    .phone-mockup {
+      background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3);
     }
-    .container {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    .phone-mockup img {
+      border-radius: 32px;
     }
-    .logo {
-      font-size: 48px;
-      text-align: center;
-      margin-bottom: 10px;
+
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      z-index: 10;
     }
-    h1 {
-      text-align: center;
-      color: #2e7d32;
-      margin-bottom: 8px;
-      font-size: 28px;
+
+    .feature-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .tagline {
-      text-align: center;
-      color: #666;
-      margin-bottom: 30px;
-      font-size: 14px;
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px rgba(46, 125, 50, 0.2);
     }
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-      font-size: 20px;
+
+    .stat-number {
+      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    ol {
-      margin: 20px 0;
-      padding-left: 24px;
+
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(30px);
     }
-    li {
-      margin-bottom: 12px;
+
+    .cta-button {
+      transition: all 0.3s ease;
     }
-    .data-section {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 8px;
-      margin: 24px 0;
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px -10px rgba(46, 125, 50, 0.5);
     }
-    .data-section h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
-      color: #555;
+
+    .testimonial-card {
+      backdrop-filter: blur(10px);
     }
-    .data-section ul {
-      padding-left: 20px;
-      color: #666;
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
-    .data-section li {
-      margin-bottom: 6px;
+
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
     }
-    .contact {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
+
+    .store-badge {
+      transition: transform 0.2s ease;
     }
-    .contact p {
-      color: #666;
-      font-size: 14px;
-    }
-    a {
-      color: #2e7d32;
-    }
-    .note {
-      font-size: 13px;
-      color: #888;
-      margin-top: 20px;
-      font-style: italic;
+
+    .store-badge:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="logo">🥬</div>
-    <h1>Foil</h1>
-    <p class="tagline">Reduce food waste, save money</p>
+<body class="bg-foil-bg text-gray-800">
 
-    <h2>Delete Your Account</h2>
-    <p>To delete your Foil account and all associated data, follow these steps:</p>
-
-    <ol>
-      <li>Open the <strong>Foil</strong> app on your device</li>
-      <li>Tap the <strong>Settings</strong> icon (gear) in the top right</li>
-      <li>Scroll down and tap <strong>"Delete Account"</strong></li>
-      <li>Confirm by tapping <strong>"Delete"</strong> in the confirmation dialog</li>
-    </ol>
-
-    <div class="data-section">
-      <h3>What data will be deleted:</h3>
-      <ul>
-        <li>Your account credentials</li>
-        <li>All saved food items</li>
-        <li>Your app preferences and settings</li>
-        <li>Notification preferences</li>
-      </ul>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img src="images/foil_logo_transparent.png" alt="Foil" class="h-10 w-10">
+        <span class="text-xl font-bold text-foil-green">Foil</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features" class="text-gray-600 hover:text-foil-green transition">Features</a>
+        <a href="#how-it-works" class="text-gray-600 hover:text-foil-green transition">How It Works</a>
+        <a href="#testimonials" class="text-gray-600 hover:text-foil-green transition">Reviews</a>
+      </div>
+      <a href="#download" class="bg-foil-green text-white px-5 py-2 rounded-full font-medium hover:bg-foil-green-dark transition">
+        Download Free
+      </a>
     </div>
+  </nav>
 
-    <p><strong>Note:</strong> Account deletion is permanent and cannot be undone. All your data will be permanently removed from our servers.</p>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 px-6 overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left: Copy -->
+        <div class="scroll-fade">
+          <div class="inline-flex items-center gap-2 bg-green-100 text-foil-green px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span class="w-2 h-2 bg-foil-green rounded-full animate-pulse"></span>
+            Now on iOS & Android
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+            Stop Wasting Food.<br>
+            <span class="gradient-text">Start Saving Money.</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+            Foil tracks what's in your kitchen, reminds you before food expires, and suggests recipes to use what you have. The average family wastes $1,500/year on food. Let's fix that.
+          </p>
 
-    <div class="contact">
-      <p>If you cannot access the app or need assistance, please email us at:<br>
-      <a href="mailto:getfoilapp@gmail.com">getfoilapp@gmail.com</a></p>
-      <p class="note">Please include the email address associated with your account. Deletion requests are typically processed within 48 hours.</p>
+          <!-- Stats inline -->
+          <div class="flex gap-8 mb-8">
+            <div>
+              <div class="text-3xl font-bold stat-number">47%</div>
+              <div class="text-sm text-gray-500">Less food wasted</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold stat-number">$127</div>
+              <div class="text-sm text-gray-500">Saved per month</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold stat-number">10K+</div>
+              <div class="text-sm text-gray-500">Items tracked</div>
+            </div>
+          </div>
+
+          <!-- Store badges -->
+          <div class="flex flex-wrap gap-4" id="download">
+            <a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="store-badge">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store" class="h-14">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="store-badge">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Phone mockup -->
+        <div class="relative flex justify-center scroll-fade">
+          <div class="phone-mockup relative float-animation" style="width: 280px;">
+            <div class="phone-notch"></div>
+            <img src="images/screens/IMG_6234.PNG" alt="Foil App - Items detected from receipt" class="w-full">
+          </div>
+          <!-- Floating badges -->
+          <div class="absolute -left-4 top-20 bg-white rounded-2xl shadow-lg p-3 hidden md:flex items-center gap-2">
+            <span class="text-2xl">🧀</span>
+            <div>
+              <div class="text-sm font-semibold">Cheese</div>
+              <div class="text-xs text-orange-500">Expires in 2 days</div>
+            </div>
+          </div>
+          <div class="absolute -right-4 bottom-32 bg-white rounded-2xl shadow-lg p-3 hidden md:flex items-center gap-2">
+            <span class="text-2xl">🥗</span>
+            <div>
+              <div class="text-sm font-semibold">Recipe found!</div>
+              <div class="text-xs text-foil-green">Uses 5 items</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Trusted By / Social Proof Bar -->
+  <section class="py-12 bg-white border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <p class="text-gray-400 text-sm mb-6">TRUSTED BY FAMILIES WHO CARE ABOUT FOOD WASTE</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⭐️</span>
+          <span class="font-semibold">4.8 Rating</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📱</span>
+          <span class="font-semibold">5,000+ Downloads</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🥬</span>
+          <span class="font-semibold">50,000+ Items Saved</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🌍</span>
+          <span class="font-semibold">Eco-Friendly</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 scroll-fade">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything You Need to<br><span class="gradient-text">Master Your Kitchen</span></h2>
+        <p class="text-xl text-gray-500 max-w-2xl mx-auto">From receipt scanning to meal planning, Foil handles it all with a sprinkle of AI magic.</p>
+      </div>
+
+      <!-- Feature 1: Receipt Scanning -->
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+        <div class="scroll-fade order-2 md:order-1">
+          <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
+            <span>📸</span> AI-Powered
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">Scan Receipts, Add 25 Items in Seconds</h3>
+          <p class="text-gray-600 mb-6 text-lg">
+            Just snap a photo of your grocery receipt. Foil's AI reads every item, assigns smart expiry dates, and sorts them into the right storage location. No manual entry needed.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Automatic item detection</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Smart expiry date assignment</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Auto-sort to Fridge, Freezer, Pantry</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-center order-1 md:order-2 scroll-fade">
+          <div class="phone-mockup" style="width: 260px;">
+            <img src="images/screens/IMG_6233.PNG" alt="Receipt scanning" class="w-full">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: AI Recipes -->
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+        <div class="flex justify-center scroll-fade">
+          <div class="phone-mockup" style="width: 260px;">
+            <img src="images/screens/IMG_6238.PNG" alt="AI Recipe suggestions" class="w-full">
+          </div>
+        </div>
+        <div class="scroll-fade">
+          <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
+            <span>✨</span> AI Recipes
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">Recipes That Use What's Expiring</h3>
+          <p class="text-gray-600 mb-6 text-lg">
+            No more "what's for dinner?" moments. Foil generates personalized recipes prioritizing ingredients that need to be used soon. Select your cuisine, dietary needs, and course type.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Prioritizes expiring ingredients</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Filter by cuisine & dietary needs</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Save favorites to your cookbook</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 3: Meal Planner -->
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+        <div class="scroll-fade order-2 md:order-1">
+          <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
+            <span>📅</span> Plan Ahead
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">Meal & Party Planner</h3>
+          <p class="text-gray-600 mb-6 text-lg">
+            Plan your week with breakfast, lunch, dinner, and snacks. Hosting a party? Set the date, guest count, and let Foil help you build the perfect menu with automatic shopping lists.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Weekly meal calendar</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Party planning with guest scaling</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Auto-generate shopping lists</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-center order-1 md:order-2 scroll-fade">
+          <div class="phone-mockup" style="width: 260px;">
+            <img src="images/screens/IMG_6239.PNG" alt="Meal Planner" class="w-full">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Household Sharing -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="flex justify-center scroll-fade">
+          <div class="phone-mockup" style="width: 260px;">
+            <img src="images/screens/IMG_6242.PNG" alt="Household sharing" class="w-full">
+          </div>
+        </div>
+        <div class="scroll-fade">
+          <div class="inline-flex items-center gap-2 bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm font-medium mb-4">
+            <span>👨‍👩‍👧‍👦</span> Family Sync
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">Share Your Kitchen</h3>
+          <p class="text-gray-600 mb-6 text-lg">
+            Create a household and invite family or roommates. Everyone sees the same inventory in real-time. No more "who ate my yogurt?" moments—now you'll know who did.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Real-time shared inventory</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Activity log (see who added/used items)</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-foil-green">✓</span>
+              <span>Up to 6 household members</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 scroll-fade">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">How Foil Works</h2>
+        <p class="text-xl text-gray-500">Three simple steps to a smarter kitchen</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="feature-card bg-foil-bg rounded-3xl p-8 text-center scroll-fade">
+          <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">📸</div>
+          <h3 class="text-xl font-bold mb-3">1. Scan Your Receipt</h3>
+          <p class="text-gray-600">Snap a photo after shopping. AI extracts all items with smart expiry dates.</p>
+        </div>
+        <div class="feature-card bg-foil-bg rounded-3xl p-8 text-center scroll-fade">
+          <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">🔔</div>
+          <h3 class="text-xl font-bold mb-3">2. Get Notified</h3>
+          <p class="text-gray-600">Foil alerts you before food expires so you can use it in time.</p>
+        </div>
+        <div class="feature-card bg-foil-bg rounded-3xl p-8 text-center scroll-fade">
+          <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">🍳</div>
+          <h3 class="text-xl font-bold mb-3">3. Cook & Save</h3>
+          <p class="text-gray-600">Get recipe ideas that prioritize expiring items. Waste less, save more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 scroll-fade">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Loved by Families</h2>
+        <p class="text-xl text-gray-500">Join thousands reducing food waste</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="testimonial-card bg-white rounded-3xl p-6 shadow-sm border border-gray-100 scroll-fade">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <p class="text-gray-700 mb-4">"Finally an app that actually helps reduce waste. The receipt scanning is magic—25 items added in 10 seconds!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">👩</div>
+            <div>
+              <div class="font-semibold text-sm">Sarah M.</div>
+              <div class="text-xs text-gray-400">Mom of 3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card bg-white rounded-3xl p-6 shadow-sm border border-gray-100 scroll-fade">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <p class="text-gray-700 mb-4">"The AI recipes are surprisingly good. It suggested a stir-fry using veggies that were about to go bad. Delicious!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">👨</div>
+            <div>
+              <div class="font-semibold text-sm">James K.</div>
+              <div class="text-xs text-gray-400">Home Cook</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card bg-white rounded-3xl p-6 shadow-sm border border-gray-100 scroll-fade">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <p class="text-gray-700 mb-4">"My roommates and I finally stopped blaming each other for missing food. The household feature is a game changer!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">👱‍♀️</div>
+            <div>
+              <div class="font-semibold text-sm">Emily R.</div>
+              <div class="text-xs text-gray-400">College Student</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 px-6 bg-gradient-to-br from-foil-green to-foil-green-light text-white">
+    <div class="max-w-4xl mx-auto text-center scroll-fade">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to Stop Wasting Food?</h2>
+      <p class="text-xl text-green-100 mb-10">Join thousands of families saving money and reducing waste. It's free to get started.</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="store-badge">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store" class="h-16">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="store-badge">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-16">
+        </a>
+      </div>
+
+      <p class="text-green-200 text-sm">Free to use. Premium features available.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-6 bg-gray-900 text-gray-400">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <img src="images/foil_logo_transparent.png" alt="Foil" class="h-8 w-8">
+            <span class="text-xl font-bold text-white">Foil</span>
+          </div>
+          <p class="text-sm">Reduce food waste, save money, and eat better with AI-powered kitchen management.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Product</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#features" class="hover:text-white transition">Features</a></li>
+            <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
+            <li><a href="#download" class="hover:text-white transition">Download</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Support</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mailto:getfoilapp@gmail.com" class="hover:text-white transition">Contact Us</a></li>
+            <li><a href="account-deletion.html" class="hover:text-white transition">Delete Account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Download</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="https://apps.apple.com/us/app/foil-app/id6759352471" target="_blank" class="hover:text-white transition">App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.getfoil.app" target="_blank" class="hover:text-white transition">Google Play</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm">
+        <p>&copy; 2024 Foil. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Animations -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate elements on scroll
+    gsap.utils.toArray('.scroll-fade').forEach(element => {
+      gsap.fromTo(element,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
