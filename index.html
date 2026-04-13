@@ -153,44 +153,69 @@
       font-weight: 500;
     }
 
-    /* Hero background rotation */
-    .hero-bg-container {
-      position: absolute;
-      inset: 0;
+    /* Hero lifestyle image carousel */
+    .lifestyle-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 3/2;
+      border-radius: 24px;
       overflow: hidden;
-      z-index: 0;
+      box-shadow:
+        0 32px 64px -16px rgba(0,0,0,0.15),
+        0 16px 32px -8px rgba(0,0,0,0.1);
     }
 
-    .hero-bg-image {
+    .lifestyle-image {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      transform: scale(1.02);
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
     }
 
-    .hero-bg-image.active {
+    .lifestyle-image.active {
       opacity: 1;
+      transform: scale(1);
     }
 
-    .hero-bg-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(250, 248, 245, 0.92) 0%, rgba(250, 248, 245, 0.85) 50%, rgba(250, 248, 245, 0.75) 100%);
-      z-index: 1;
-    }
-
-    .hero-content {
+    .lifestyle-frame {
       position: relative;
-      z-index: 2;
     }
 
-    @media (max-width: 1024px) {
-      .hero-bg-overlay {
-        background: linear-gradient(180deg, rgba(250, 248, 245, 0.95) 0%, rgba(250, 248, 245, 0.9) 100%);
-      }
+    .lifestyle-frame::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #2e7d32 0%, #4caf50 50%, #81c784 100%);
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D1D5DB;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: #2e7d32;
+      width: 24px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -215,20 +240,12 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="pt-32 pb-24 px-6 overflow-hidden relative min-h-[90vh] flex items-center">
-    <!-- Rotating Background Images -->
-    <div class="hero-bg-container">
-      <img src="images/hero-1.png" alt="" class="hero-bg-image active" id="hero-bg-1">
-      <img src="images/hero-2.png" alt="" class="hero-bg-image" id="hero-bg-2">
-      <img src="images/hero-3.png" alt="" class="hero-bg-image" id="hero-bg-3">
-      <div class="hero-bg-overlay"></div>
-    </div>
-
-    <div class="max-w-6xl mx-auto hero-content">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+  <section class="pt-32 pb-20 px-6 overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <!-- Left: Copy -->
         <div class="scroll-fade">
-          <div class="badge-pill bg-foil-green/10 text-foil-green mb-8 backdrop-blur-sm">
+          <div class="badge-pill bg-foil-green/10 text-foil-green mb-8">
             <span class="w-2 h-2 bg-foil-green rounded-full"></span>
             Now on iOS & Android
           </div>
@@ -269,38 +286,25 @@
           </div>
         </div>
 
-        <!-- Right: Phone mockup -->
-        <div class="relative flex justify-center scroll-fade">
-          <div class="relative">
-            <div class="phone-glow"></div>
-            <div class="phone-mockup float-animation" style="width: 280px;">
-              <img src="images/screens/app-inventory.png" alt="Foil App - Organized kitchen inventory" class="w-full">
+        <!-- Right: Lifestyle Image Carousel -->
+        <div class="flex flex-col items-center scroll-fade">
+          <div class="lifestyle-frame">
+            <div class="lifestyle-carousel" id="lifestyle-carousel">
+              <img src="images/lifestyle-1.png" alt="Woman organizing groceries with Foil" class="lifestyle-image active">
+              <img src="images/lifestyle-2.png" alt="Couple planning meals together" class="lifestyle-image">
+              <img src="images/lifestyle-3.png" alt="Happy cook in the kitchen" class="lifestyle-image">
+              <img src="images/lifestyle-5.png" alt="Family managing groceries together" class="lifestyle-image">
+              <img src="images/lifestyle-4.png" alt="Friends cooking together" class="lifestyle-image">
+              <img src="images/lifestyle-7.png" alt="Roommates sharing kitchen duties" class="lifestyle-image">
             </div>
           </div>
-
-          <!-- Floating notification cards -->
-          <div class="notification-card absolute -left-8 top-24 hidden lg:flex items-center gap-3 backdrop-blur-sm">
-            <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
-              <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <div class="text-sm font-medium text-foil-charcoal">Cheddar Cheese</div>
-              <div class="text-xs text-amber-600">Use within 2 days</div>
-            </div>
-          </div>
-
-          <div class="notification-card absolute -right-4 bottom-36 hidden lg:flex items-center gap-3 backdrop-blur-sm">
-            <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
-              <svg class="w-5 h-5 text-foil-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <div class="text-sm font-medium text-foil-charcoal">Recipe found</div>
-              <div class="text-xs text-foil-green">Uses 5 ingredients</div>
-            </div>
+          <div class="carousel-dots" id="carousel-dots">
+            <span class="carousel-dot active" data-index="0"></span>
+            <span class="carousel-dot" data-index="1"></span>
+            <span class="carousel-dot" data-index="2"></span>
+            <span class="carousel-dot" data-index="3"></span>
+            <span class="carousel-dot" data-index="4"></span>
+            <span class="carousel-dot" data-index="5"></span>
           </div>
         </div>
       </div>
@@ -724,23 +728,35 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero background image rotation
+    // Lifestyle image carousel
     (function() {
-      const images = document.querySelectorAll('.hero-bg-image');
+      const images = document.querySelectorAll('.lifestyle-image');
+      const dots = document.querySelectorAll('.carousel-dot');
       let currentIndex = 0;
       const totalImages = images.length;
 
-      function rotateBackground() {
+      function goToSlide(index) {
         // Remove active from current
         images[currentIndex].classList.remove('active');
-        // Move to next
-        currentIndex = (currentIndex + 1) % totalImages;
+        dots[currentIndex].classList.remove('active');
+        // Update index
+        currentIndex = index;
         // Add active to new current
         images[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
       }
 
-      // Rotate every 5 seconds
-      setInterval(rotateBackground, 5000);
+      function nextSlide() {
+        goToSlide((currentIndex + 1) % totalImages);
+      }
+
+      // Click handlers for dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+      });
+
+      // Auto-rotate every 4 seconds
+      setInterval(nextSlide, 4000);
     })();
 
     // Animate elements on scroll
